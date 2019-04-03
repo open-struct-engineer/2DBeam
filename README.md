@@ -5,7 +5,7 @@ Methods of analysis in this repository will be limited to traiditional methods s
 
 To-Do Administrative:
 
-- [ ] Determine Licensing of Repository
+- [x] Determine Licensing of Repository
 - [ ] Determine programming languages to be supported
 
 To-Do Global:
