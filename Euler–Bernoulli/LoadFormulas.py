@@ -153,9 +153,6 @@ class no_load:
 
         self.kind = 'NL'
 
-        self.x_graph = [0]
-        self.y_graph = [0]
-
     def chart_load(self,x_scale=0, y_scale=0, arrows=0):
         x = [0]
         y = [0]
@@ -251,14 +248,6 @@ class pl:
         self.c4 = ((-1*self.rl * self.a ** 3) / 3) - ((self.rr * self.a ** 3) / 3) + ((self.rr * self.L * self.a ** 2) / 2)
         self.c2 = (-1 / self.L) * ((self.c4) + ((self.rr * self.L ** 3) / 3))
         self.c1 = ((-1*self.rr * self.a ** 2) / 2) - ((self.rl * self.a ** 2) / 2) + (self.rr * self.L * self.a) + self.c2
-
-        arrow_height = self.p/6.0
-        #30 degree arrow
-        arrow_plus= self.a+(arrow_height*math.tan(math.radians(30)))
-        arrow_minus= self.a-(arrow_height*math.tan(math.radians(30)))
-
-        self.x_graph=[arrow_minus,self.a,arrow_plus,self.a,self.a]
-        self.y_graph=[arrow_height,0,arrow_height,0,self.p]
 
     def chart_load(self, x_scale=0, y_scale=0, arrows=0):
         if arrows == 1:
@@ -421,39 +410,6 @@ class point_moment:
         self.c1 = ma*a + self.c2
         self.c3 = 0
         self.c4 = ((-1.0*self.rl*self.L**3)/6.0) - (0.5*self.ma*self.L**2) - (self.c2*self.L)
-
-        r = (self.ma/2.0)
-        arrow_height = r/6.0
-        #30 degree arrow
-        arrow_minus= (arrow_height*math.tan(math.radians(30)))
-
-        if self.ma <0:
-            self.x_graph = [self.a,self.a,self.a]
-            self.y_graph = [r,0,-r]
-            x=0
-            y=0
-            for a in range(-90, 181):
-                x = self.a+(r*math.cos(math.radians(a)))
-                y = 0+(r*math.sin(math.radians(a)))
-                self.x_graph.append(x)
-                self.y_graph.append(y)
-
-            self.x_graph.append(x-arrow_minus)
-            self.y_graph.append(y+arrow_height)
-            self.x_graph.append(x)
-            self.y_graph.append(y)
-            self.x_graph.append(x+arrow_minus)
-            self.y_graph.append(y+arrow_height)
-        else:
-            self.x_graph = [self.a-r,self.a,self.a+r, self.a+r-arrow_minus,self.a+r,self.a+r+arrow_minus,self.a+r]
-            self.y_graph = [0,0,0,arrow_height,0,arrow_height,0]
-            x=0
-            y=0
-            for a in range(0,271):
-                x = self.a+(r*math.cos(math.radians(a)))
-                y = 0+(r*math.sin(math.radians(a)))
-                self.x_graph.append(x)
-                self.y_graph.append(y)
 
     def chart_load(self, x_scale=0, y_scale=0, arrows=0):
         x=[]
@@ -679,16 +635,6 @@ class udl:
         self.c5 = ((-1 * self.rl * self.b ** 2) / 2) + ((self.w1 * self.b ** 3) / 6) - ((self.w1 * self.a * self.b ** 2) / 2) - ((self.rr * self.b ** 2) / 2) + (self.c3 * self.b) - (self.c2 * self.b) + self.c6
         self.c4 = ((self.w1 * self.a ** 3) / 3) + (self.c2 * self.a) + self.c5 - (self.c1 * self.a)
 
-        arrow_height = self.w1/12.0
-        #30 degree arrow
-        arrow_plus_start= self.a+(arrow_height*math.tan(math.radians(30)))
-        arrow_minus_start= self.a-(arrow_height*math.tan(math.radians(30)))
-        arrow_plus_end= self.b+(arrow_height*math.tan(math.radians(30)))
-        arrow_minus_end= self.b-(arrow_height*math.tan(math.radians(30)))
-
-        self.x_graph=[arrow_minus_start,self.a,arrow_plus_start,self.a,self.a,self.b,self.b,arrow_minus_end,self.b,arrow_plus_end]
-        self.y_graph=[arrow_height,0,arrow_height,0,self.w1,self.w1,0,arrow_height,0,arrow_height]
-
     def chart_load(self, x_scale=0, y_scale=0, arrows=0):
         x=[]
         y=[]
@@ -894,17 +840,6 @@ class trap:
         self.c6 = (((self.rr * self.L ** 3) / 6) - ((self.c3 * self.L ** 2) / 2) - self.c9) / self.L
         self.c5 = ((-1 * self.rr * self.b ** 2) / 2) + (self.c3 * self.b) + self.c6 - ((self.rl * self.b ** 2) / 2) + ((self.b ** 4 * self.s) / 24) + ((self.b ** 3 * (self.w1 - (self.s * self.a))) / 6) + ((((self.s * self.a) - (2 * self.w1)) * self.a * self.b ** 2) / 4) - (self.c2 * self.b)
         self.c4 = ((-1 * self.a ** 4 * self.s) / 24) - ((self.a ** 3 * (self.w1 - (self.s * self.a))) / 6) - ((((self.s * self.a) - (2 * self.w1)) * self.a ** 3) / 4) + (self.c2 * self.a) + self.c5 - (self.c1 * self.a)
-
-        arrow_height = self.w1/6.0
-        arrow_height2 = self.w2/6.0
-        #30 degree arrow
-        arrow_plus_start= self.a+(arrow_height*math.tan(math.radians(30)))
-        arrow_minus_start= self.a-(arrow_height*math.tan(math.radians(30)))
-        arrow_plus_end= self.b+(arrow_height2*math.tan(math.radians(30)))
-        arrow_minus_end= self.b-(arrow_height2*math.tan(math.radians(30)))
-
-        self.x_graph=[arrow_minus_start,self.a,arrow_plus_start,self.a,self.a,self.b,self.b,arrow_minus_end,self.b,arrow_plus_end]
-        self.y_graph=[arrow_height,0,arrow_height,0,self.w1,self.w2,0,arrow_height2,0,arrow_height2]
 
     def chart_load(self, x_scale=0, y_scale=0, arrows=0):
         x=[]
@@ -1191,9 +1126,6 @@ class cant_right_nl:
 
         self.kind = 'NL'
 
-        self.x_graph = [0]
-        self.y_graph = [0]
-
     def chart_load(self, x_scale=0, y_scale=0, arrows=0):
         x=[0]
         y=[0]
@@ -1316,14 +1248,6 @@ class cant_right_point:
         self.c2 = 0
         self.c3 = 0.5*self.rl*self.a**2 + self.ml*self.a + self.c1
         self.c4 = -1.0*self.c3*self.a + (1.0/6.0)*self.rl*self.a**3 + 0.5*self.ml*self.a**2 + self.c1*self.a + self.c2
-
-        arrow_height = self.p/6.0
-        #30 degree arrow
-        arrow_plus= self.a+(arrow_height*math.tan(math.radians(30)))
-        arrow_minus= self.a-(arrow_height*math.tan(math.radians(30)))
-
-        self.x_graph=[arrow_minus,self.a,arrow_plus,self.a,self.a]
-        self.y_graph=[arrow_height,0,arrow_height,0,self.p]
 
     def chart_load(self, x_scale=0, y_scale=0, arrows=0):
 
@@ -1497,39 +1421,6 @@ class cant_right_point_moment:
         self.c2 = 0
         self.c3 = self.ml*self.a + self.c1
         self.c4 = 0.5*self.ml*self.a**2 + self.c1 * self.a + self.c2 - self.c3 * self.a
-
-        r = (self.ma/2.0)
-        arrow_height = r/6.0
-        #30 degree arrow
-        arrow_minus= (arrow_height*math.tan(math.radians(30)))
-
-        if self.ma <0:
-            self.x_graph = [self.a,self.a,self.a]
-            self.y_graph = [r,0,-r]
-            x=0
-            y=0
-            for a in range(-90, 181):
-                x = self.a+(r*math.cos(math.radians(a)))
-                y = 0+(r*math.sin(math.radians(a)))
-                self.x_graph.append(x)
-                self.y_graph.append(y)
-
-            self.x_graph.append(x-arrow_minus)
-            self.y_graph.append(y+arrow_height)
-            self.x_graph.append(x)
-            self.y_graph.append(y)
-            self.x_graph.append(x+arrow_minus)
-            self.y_graph.append(y+arrow_height)
-        else:
-            self.x_graph = [self.a-r,self.a,self.a+r, self.a+r-arrow_minus,self.a+r,self.a+r+arrow_minus,self.a+r]
-            self.y_graph = [0,0,0,arrow_height,0,arrow_height,0]
-            x=0
-            y=0
-            for a in range(0,271):
-                x = self.a+(r*math.cos(math.radians(a)))
-                y = 0+(r*math.sin(math.radians(a)))
-                self.x_graph.append(x)
-                self.y_graph.append(y)
 
     def chart_load(self, x_scale=0, y_scale=0, arrows=0):
         r = (self.ma/2.0)
@@ -1724,16 +1615,6 @@ class cant_right_udl:
         self.c4 = self.c1*self.a + self.c2 - self.c3*a
         self.c5 = 0.5*self.w_tot*self.b**2 + self.ml*self.b - (1.0/6.0)*self.w1*(self.b-self.a)**3 + self.c3
         self.c6 = (1.0/6.0)*self.w_tot*self.b**3 + 0.5*self.ml*self.b**2 - (1.0/24.0)*self.w1*(self.b-self.a)**4 + self.c3*self.b + self.c4 - self.c5*self.b
-
-        arrow_height = self.w1/12.0
-        #30 degree arrow
-        arrow_plus_start= self.a+(arrow_height*math.tan(math.radians(30)))
-        arrow_minus_start= self.a-(arrow_height*math.tan(math.radians(30)))
-        arrow_plus_end= self.b+(arrow_height*math.tan(math.radians(30)))
-        arrow_minus_end= self.b-(arrow_height*math.tan(math.radians(30)))
-
-        self.x_graph=[arrow_minus_start,self.a,arrow_plus_start,self.a,self.a,self.b,self.b,arrow_minus_end,self.b,arrow_plus_end]
-        self.y_graph=[arrow_height,0,arrow_height,0,self.w1,self.w1,0,arrow_height,0,arrow_height]
 
     def chart_load(self, x_scale=0, y_scale=0, arrows=0):
         if arrows == 1:
@@ -1970,17 +1851,6 @@ class cant_right_trap:
         self.c6 = (0.5*self.rl*self.b**2)+self.c3*self.b + (1.0/24.0)*self.s*self.b**4 - (1.0/6.0)*((self.s*self.a)+self.w1)*self.b**3 + 0.25*((self.s*self.a)+(2*self.w1))*self.a*self.b**2 + self.c4
         self.c7 = ((1.0/6.0)*self.rl*self.b**3) + 0.5*self.c3*self.b**2 + (1.0/120.0)*self.s*self.b**5 - (1.0/24.0)*((self.s*self.a)+self.w1)*self.b**4 + (1.0/12.0)*((self.s*self.a)+(2*self.w1))*self.a*self.b**3 + self.c4*self.b + self.c5 - self.c6*self.b
 
-        arrow_height = self.w1/6.0
-        arrow_height2 = self.w2/6.0
-        #30 degree arrow
-        arrow_plus_start= self.a+(arrow_height*math.tan(math.radians(30)))
-        arrow_minus_start= self.a-(arrow_height*math.tan(math.radians(30)))
-        arrow_plus_end= self.b+(arrow_height2*math.tan(math.radians(30)))
-        arrow_minus_end= self.b-(arrow_height2*math.tan(math.radians(30)))
-
-        self.x_graph=[arrow_minus_start,self.a,arrow_plus_start,self.a,self.a,self.b,self.b,arrow_minus_end,self.b,arrow_plus_end]
-        self.y_graph=[arrow_height,0,arrow_height,0,self.w1,self.w2,0,arrow_height2,0,arrow_height2]
-
     def chart_load(self, x_scale=0, y_scale=0, arrows=0):
         if arrows == 1:
             arrow_height = self.w1/6.0
@@ -2192,9 +2062,6 @@ class cant_left_nl:
         self.rl = 0
         self.mr = 0
 
-        self.x_graph = [0]
-        self.y_graph = [0]
-
     def chart_load(self, x_scale=0, y_scale=0, arrows=0):
         x = [0]
         y = [0]
@@ -2316,14 +2183,6 @@ class cant_left_point:
         self.c4 = ((1/6.0)*self.p*(self.L-self.a)**3) - (self.c3*self.L)
         self.c1 = self.c3
         self.c2 = (self.c3*self.a) + self.c4 - (self.c1*self.a)
-
-        arrow_height = self.p/6.0
-        #30 degree arrow
-        arrow_plus= self.a+(arrow_height*math.tan(math.radians(30)))
-        arrow_minus= self.a-(arrow_height*math.tan(math.radians(30)))
-
-        self.x_graph=[arrow_minus,self.a,arrow_plus,self.a,self.a]
-        self.y_graph=[arrow_height,0,arrow_height,0,self.p]
 
     def chart_load(self, x_scale=0, y_scale=0, arrows=0):
         if arrows == 1:
@@ -2485,39 +2344,6 @@ class cant_left_point_moment:
         self.c4 = (-0.5*self.ma*self.L**2) - self.c3*self.L
         self.c1 = (1.0*self.ma*self.a) + self.c3
         self.c2 = 0.5*self.ma*self.a**2 + self.c3*self.a + self.c4 - self.c1*self.a
-
-        r = (self.ma/2.0)
-        arrow_height = r/6.0
-        #30 degree arrow
-        arrow_minus= (arrow_height*math.tan(math.radians(30)))
-
-        if self.ma <0:
-            self.x_graph = [self.a,self.a,self.a]
-            self.y_graph = [r,0,-r]
-            x=0
-            y=0
-            for a in range(-90, 181):
-                x = self.a+(r*math.cos(math.radians(a)))
-                y = 0+(r*math.sin(math.radians(a)))
-                self.x_graph.append(x)
-                self.y_graph.append(y)
-
-            self.x_graph.append(x-arrow_minus)
-            self.y_graph.append(y+arrow_height)
-            self.x_graph.append(x)
-            self.y_graph.append(y)
-            self.x_graph.append(x+arrow_minus)
-            self.y_graph.append(y+arrow_height)
-        else:
-            self.x_graph = [self.a-r,self.a,self.a+r, self.a+r-arrow_minus,self.a+r,self.a+r+arrow_minus,self.a+r]
-            self.y_graph = [0,0,0,arrow_height,0,arrow_height,0]
-            x=0
-            y=0
-            for a in range(0,271):
-                x = self.a+(r*math.cos(math.radians(a)))
-                y = 0+(r*math.sin(math.radians(a)))
-                self.x_graph.append(x)
-                self.y_graph.append(y)
 
     def chart_load(self, x_scale=0, y_scale=0, arrows=0):
         r = (self.ma/2.0)
@@ -2712,16 +2538,6 @@ class cant_left_udl:
         self.c1 = self.c3
         self.c4 = ((-1.0/6.0)*self.w_tot * (self.b - (self.a + (0.5*self.c)))**3) + (self.c5*self.b) + self.c6 + ((1.0/24.0)*self.w1*(self.b-self.a)**4) - (self.c3*self.b)
         self.c2 = (self.c3*self.a) + self.c4 - (self.c1*self.a)
-
-        arrow_height = self.w1/12.0
-        #30 degree arrow
-        arrow_plus_start= self.a+(arrow_height*math.tan(math.radians(30)))
-        arrow_minus_start= self.a-(arrow_height*math.tan(math.radians(30)))
-        arrow_plus_end= self.b+(arrow_height*math.tan(math.radians(30)))
-        arrow_minus_end= self.b-(arrow_height*math.tan(math.radians(30)))
-
-        self.x_graph=[arrow_minus_start,self.a,arrow_plus_start,self.a,self.a,self.b,self.b,arrow_minus_end,self.b,arrow_plus_end]
-        self.y_graph=[arrow_height,0,arrow_height,0,self.w1,self.w1,0,arrow_height,0,arrow_height]
 
     def chart_load(self, x_scale=0, y_scale=0, arrows=0):
         if arrows == 1:
@@ -2976,17 +2792,6 @@ class cant_left_trap:
         self.c5 = ((-1.0/6.0)*self.w*(self.b-self.cc)**3) + (self.c6*self.b)+self.c7-(0.5*self.c3*self.b**2)-(self.c4*self.b)-((1.0/120.0)*self.b**3 *((self.b**2 * self.s) - (5*self.b*((self.a*self.s) + self.w1)) + (10*self.a*((self.a*self.s) + (2*self.w1)))))
         self.c1 = ((1.0/24.0)*self.a**2 *((self.a**2 * self.s) - (4*self.a*((self.a*self.s) + self.w1)) + (6*self.a*((self.a*self.s) + (2*self.w1))))) + (self.c3*self.a) + self.c4
         self.c2 = ((1.0/120.0)*self.a**3 *((self.a**2 * self.s) - (5*self.a*((self.a*self.s) + self.w1)) + (10*self.a*((self.a*self.s) + (2*self.w1))))) + (0.5*self.c3*self.a**2) + (self.c4*self.a) + self.c5 - (self.c1*self.a)
-
-        arrow_height = self.w1/6.0
-        arrow_height2 = self.w2/6.0
-        #30 degree arrow
-        arrow_plus_start= self.a+(arrow_height*math.tan(math.radians(30)))
-        arrow_minus_start= self.a-(arrow_height*math.tan(math.radians(30)))
-        arrow_plus_end= self.b+(arrow_height2*math.tan(math.radians(30)))
-        arrow_minus_end= self.b-(arrow_height2*math.tan(math.radians(30)))
-
-        self.x_graph=[arrow_minus_start,self.a,arrow_plus_start,self.a,self.a,self.b,self.b,arrow_minus_end,self.b,arrow_plus_end]
-        self.y_graph=[arrow_height,0,arrow_height,0,self.w1,self.w2,0,arrow_height2,0,arrow_height2]
 
     def chart_load(self, x_scale=0, y_scale=0, arrows=0):
         if arrows == 1:
