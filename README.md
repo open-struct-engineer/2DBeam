@@ -5,8 +5,8 @@ Methods of analysis in this repository will be limited to traiditional methods s
 
 To-Do Administrative:
 
-- [x] Determine Licensing of Repository
-- [ ] Determine programming languages to be supported
+- [x] Determine Licensing of Repository - [b]3 Clause BSD[/b]
+- [x] Determine programming languages to be supported - [b]Python and VBA[/b]
 
 To-Do Global:
 
